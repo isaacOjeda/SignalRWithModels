@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-
-using System.Web.Script.Serialization;
+using Microsoft.AspNet.SignalR;
 
 namespace SignalrMvcTest.Controllers
 {
@@ -24,13 +21,10 @@ namespace SignalrMvcTest.Controllers
                 Name = "Algo super importante!",
                 Url = "http://balusoft.wordpress.com"                
             };
+            
 
-            // Serializamos el objeto
-            string json = new JavaScriptSerializer().Serialize(dummy);
-
-            var hub = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<SignalClass>();
-            hub.Clients.All.onNewItem(json);
-
+            var hub = GlobalHost.ConnectionManager.GetHubContext<SignalClass>();
+            hub.Clients.All.onNewItem(dummy);
 
             return View();
         }

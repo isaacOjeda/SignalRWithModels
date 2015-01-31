@@ -18,10 +18,8 @@
         $(function () {
             var signal = $.connection.signalClass;
 
-            signal.client.onNewItem = function (jsonString) {
-                var jsonObject = JSON.parse(jsonString);
-                
-                Util.createDiv(jsonObject);
+            signal.client.onNewItem = function (dummyObject) {                                
+                Util.createDiv(dummyObject);
             };
 
             $.connection.hub.start();
